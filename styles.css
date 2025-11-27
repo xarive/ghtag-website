@@ -262,3 +262,13 @@ footer{
 .client-list{columns:1;column-gap:28px}
 .client-list li{padding:6px 0;color:var(--muted);font-size:15px}
 @media(min-width:900px){ .client-list{columns:2} }
+
+
+/* Team section layout */
+.team { max-width:1200px; margin:0 auto; padding:30px 18px; }
+.team-grid { display:flex; gap:28px; flex-wrap:wrap; }
+.team-column { flex:1 1 320px; min-width:260px; }
+.team h3 { margin:0 0 8px; font-size:16px; text-decoration:underline; text-underline-offset:6px; }
+.team-list { list-style:none; padding:0; margin:0 0 18px 0; }
+.team-list li { padding:6px 0; color:var(--muted); font-weight:600; }
+@media(max-width:760px){ .team-grid { flex-direction:column; } .team-column{min-width:100%} }
