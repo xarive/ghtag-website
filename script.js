@@ -1,53 +1,60 @@
 
-// show current year
-const yr = document.getElementById('yr');
-if(yr) yr.textContent = new Date().getFullYear();
+/* GH TAG — production script.js */
+/* Mobile menu toggle, progressive animations, smooth scrolling */
 
-// basic static form behavior
-(function(){
-  const form = document.getElementById('contactForm');
-  if(!form) return;
-  const msg = document.getElementById('formMsg');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-    if(!name || !email || !message){
-      alert('Please complete name, email and message.');
-      return;
-    }
-    msg.style.display = 'block';
-    msg.textContent = 'Thanks! This is a static demo — your message is not sent from this page. Please use admin@ghtag.com to email us directly.';
-    form.reset();
-    setTimeout(()=> msg.style.display='none', 6000);
-  });
-})();
+document.addEventListener('DOMContentLoaded', function(){
+  // current year
+  const yr = document.getElementById('yr');
+  if(yr) yr.textContent = new Date().getFullYear();
 
-// smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click', e=>{
-    const target = document.querySelector(a.getAttribute('href'));
-    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
-  });
-});
+  // Mobile menu toggle
+  const toggle = document.querySelector('.menu-toggle');
+  const mobileNav = document.querySelector('.mobile-nav');
+  if(toggle && mobileNav){
+    toggle.addEventListener('click', function(e){
+      const open = mobileNav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      mobileNav.setAttribute('aria-hidden', open ? 'false' : 'true');
+      if(open){ mobileNav.querySelector('a')?.focus(); }
+    });
 
-
-// Add 'is-loaded' to body for CSS entrance animations after load
-window.addEventListener('load', function() {
-  document.body.classList.add('is-loaded');
-});
-
-// IntersectionObserver to add 'is-visible' for elements (progressive reveal)
-(function(){
-  if(!('IntersectionObserver' in window)) return;
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('is-loaded');
-        io.unobserve(entry.target);
+    // close when clicking outside
+    document.addEventListener('click', (e)=>{
+      if(!mobileNav.classList.contains('open')) return;
+      if(!mobileNav.contains(e.target) && !toggle.contains(e.target)){
+        mobileNav.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+        mobileNav.setAttribute('aria-hidden','true');
       }
     });
-  }, {threshold: 0.12});
-  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
-})();
+  }
+
+  // IntersectionObserver for fade-up animations (respect reduced motion)
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(prefersReduced){
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('is-loaded'));
+  } else if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-loaded');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.08});
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('is-loaded'));
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', function(e){
+      const target = document.querySelector(this.getAttribute('href'));
+      if(target){
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  });
+});

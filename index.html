@@ -31,23 +31,40 @@
 </head>
 <body>
   <div class="wrap">
-    <header class="site-header">
-    <header>
-      <div class="logo" aria-label="GH TAG">
-        <div class="mark"><img src="logo.png" alt="GH TAG logo" role="img"  alt="GH TAG logo" style="height:44px;object-fit:contain"></div>
-        <div>
-          <div style="font-size:14px">GH TAG Sdn. Bhd.</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px">Consulting Mechanical and Electrical Engineers</div>
-        </div>
-      </div>
-      <nav aria-label="Main navigation" role="navigation">
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Contact</a>
-        <a class="cta" href="#projects">Case Studies</a>
-      </nav>
-    </header>
+    
+<header class="site-header" role="banner">
+  <div class="logo" aria-label="GH TAG">
+    <img src="logo.png" alt="GH TAG logo" />
+    <div>
+      <div class="brand">GH TAG Sdn. Bhd.</div>
+      <div class="subtitle">Consulting Mechanical and Electrical Engineers</div>
+    </div>
+  </div>
+
+  <nav class="nav-desktop" role="navigation" aria-label="Main navigation">
+    <a href="#services">Services</a>
+    <a href="#projects">Projects</a>
+    <a href="#team">Team</a>
+    <a href="#contact">Contact</a>
+    <a class="cta" href="#projects">Case Studies</a>
+  </nav>
+
+  <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 7h18M3 12h18M3 17h18"/>
+    </svg>
+  </button>
+
+  <nav class="mobile-nav" aria-hidden="true" role="navigation" aria-label="Mobile navigation">
+    <a href="#services">Services</a>
+    <a href="#projects">Projects</a>
+    <a href="#team">Team</a>
+    <a href="#contact">Contact</a>
+    <a class="cta" href="#projects">Case Studies</a>
+  </nav>
+</header>
+
 
     <!-- HERO -->
     
