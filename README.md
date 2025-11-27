@@ -1,22 +1,25 @@
-# GH TAG Website
+# GH TAG Website (Fresh GitHub Version)
 
-This repository contains the static site for **GH TAG Sdn. Bhd.**, a premium engineering consultancy website.
+This is the clean GitHub-ready version of the GH TAG Sdn. Bhd. website.
 
-## Files
-- `index.html` — homepage
-- `styles.css` — styling (premium minimalist)
-- `script.js` — small client-side scripts and animations
-- `logo.png` — header logo (your uploaded asset)
+## Files included
+- index.html  
+- styles.css / styles.min.css  
+- script.js / script.min.js  
+- logo.png  
+- manifest.json  
+- robots.txt  
+- sitemap.xml  
+- _headers (Netlify caching + security)
 
-## Deploy
-You can deploy this site to Netlify:
-1. Create a GitHub repo and push these files to the `main` branch.
-2. On Netlify, choose **Import from Git** → select this repository.
-3. Build command: *leave blank*
-4. Publish directory: `.`
-5. Deploy.
+## How to deploy (GitHub → Netlify)
 
-## Notes
-- The contact form is static and does not send emails. Use `mailto:admin@ghtag.com` or configure Netlify Forms / Formspree if desired.
-- To replace the hero image, edit `index.html` and add your image file to the repo.
+1. Create a GitHub repo named `ghtag-website`
+2. Upload all files in this folder to the root of the repo
+3. On Netlify:  
+   - Add new site → Import from GitHub  
+   - Build command: *(leave blank)*  
+   - Publish directory: `.`  
+4. Deploy instantly  
+5. Site will re-deploy on every git push
 
