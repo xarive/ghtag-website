@@ -1,0 +1,1 @@
+This version includes social meta tags, JSON-LD, manifest.json, robots, sitemap, and improved headers for Netlify. Replace logo.png with high-res assets and add responsive hero images for best performance.
