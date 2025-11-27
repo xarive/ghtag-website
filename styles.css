@@ -192,3 +192,73 @@ footer{
   .nav{display:none;}
   .menu-toggle{display:block;}
 }
+
+
+/* Clientele Section */
+.clientele { text-align:center; padding-top:10px; padding-bottom:10px; }
+.client-grid {
+  display:grid;
+  gap:16px;
+  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  margin-top:20px;
+  align-items:stretch;
+}
+.client-card {
+  background:white;
+  padding:18px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,0.06);
+  font-weight:600;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+  transition:transform .25s ease, box-shadow .25s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:64px;
+}
+.client-card:hover {
+  transform:translateY(-6px);
+  box-shadow:0 12px 30px rgba(0,0,0,0.06);
+}
+
+/* ensure fade-up elements work in clientele */
+.clientele.fade-up { opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease; }
+.clientele.fade-up.is-visible { opacity:1; transform:translateY(0); }
+
+/* Responsive tweaks */
+@media(min-width:760px){
+  .client-grid{gap:20px}
+}
+
+/* Accordion Services */
+
+/* Accordion Services */
+.accordion{max-width:1100px;margin:0 auto;padding:10px 18px}
+.accordion-item{border-bottom:1px solid rgba(0,0,0,0.04);padding:8px 0}
+.accordion-toggle{width:100%;text-align:left;padding:14px 16px;border-radius:10px;background:#fff;border:1px solid rgba(0,0,0,0.06);font-weight:700;font-size:16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.accordion-toggle::after{content:'+';font-weight:700;color:var(--accent);margin-left:12px}
+.accordion-toggle[aria-expanded="true"]::after{content:'−'}
+
+/* Panel collapsed */
+.accordion-panel{max-height:0;overflow:hidden;transition:max-height .36s ease, opacity .28s ease;padding:0 16px}
+.accordion-panel.is-open{max-height:1200px;padding:12px 16px;opacity:1}
+
+/* Service list */
+.service-list{list-style:none;padding:0;margin:0;columns:1;column-gap:28px}
+.service-list li{padding:6px 0;color:var(--muted);font-size:15px}
+
+/* Responsive columns for longer lists */
+@media(min-width:900px){
+  .service-list{columns:2}
+}
+@media(min-width:1200px){
+  .service-list{columns:2}
+}
+
+
+/* Clientele accordion tweaks */
+.clientele{max-width:1200px;margin:0 auto;padding:20px}
+.client-grid, .client-list{margin:0;padding:0;list-style:disc}
+.client-list{columns:1;column-gap:28px}
+.client-list li{padding:6px 0;color:var(--muted);font-size:15px}
+@media(min-width:900px){ .client-list{columns:2} }
