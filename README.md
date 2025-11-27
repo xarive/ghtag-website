@@ -1,3 +1,3 @@
-# GH TAG Premium Minimal Site
+# GH TAG Website Test
 
-Prepared for GitHub & Netlify deploy.
+Prepared by Loh Wei Kiat
