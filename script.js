@@ -94,3 +94,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 })();
+
+
+// Ensure new clientele accordion behaves same as other accordions
+(function(){
+  document.querySelectorAll('.clientele .accordion-toggle').forEach(btn => {
+    const panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if(!panel) return;
+    panel.style.maxHeight = 0;
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.clientele .accordion-toggle[aria-expanded="true"]').forEach(other => {
+        if(other !== btn){
+          const otherPanel = document.getElementById(other.getAttribute('aria-controls'));
+          other.setAttribute('aria-expanded','false');
+          if(otherPanel){ otherPanel.classList.remove('is-open'); otherPanel.style.maxHeight = 0; }
+        }
+      });
+      btn.setAttribute('aria-expanded', !expanded ? 'true' : 'false');
+      if(!expanded){ panel.classList.add('is-open'); panel.style.maxHeight = panel.scrollHeight + 'px'; }
+      else { panel.classList.remove('is-open'); panel.style.maxHeight = 0; }
+    });
+  });
+})();

@@ -272,3 +272,10 @@ footer{
 .team-list { list-style:none; padding:0; margin:0 0 18px 0; }
 .team-list li { padding:6px 0; color:var(--muted); font-weight:600; }
 @media(max-width:760px){ .team-grid { flex-direction:column; } .team-column{min-width:100%} }
+
+
+/* Clientele detailed list styling */
+.clientele{max-width:1200px;margin:0 auto;padding:20px}
+.client-list{list-style:disc;margin:8px 0 20px 20px;padding:0;columns:1;column-gap:28px}
+.client-list li{padding:4px 0;color:var(--muted);font-size:15px}
+@media(min-width:900px){ .client-list{columns:2} }
