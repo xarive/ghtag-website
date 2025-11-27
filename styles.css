@@ -279,19 +279,3 @@ footer{
 .client-list{list-style:disc;margin:8px 0 20px 20px;padding:0;columns:1;column-gap:28px}
 .client-list li{padding:4px 0;color:var(--muted);font-size:15px}
 @media(min-width:900px){ .client-list{columns:2} }
-
-
-
-/* Smooth scrolling for in-page anchors (respects reduced motion) */
-html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
-/* Offset target fix: ensure anchor targets are not hidden under sticky header */
-:target::before {
-  content: "";
-  display: block;
-  height: 84px; /* approximate header height; adjust if needed */
-  margin-top: -84px;
-  visibility: hidden;
-  pointer-events: none;
-}
