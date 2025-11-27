@@ -1,4 +1,77 @@
 
+/* ---- Refined animation system ---- */
+:root{
+  --anim-duration: 560ms;
+  --anim-ease: cubic-bezier(.2,.85,.25,1);
+  --anim-ease-soft: cubic-bezier(.2,.8,.2,1);
+  --fade-distance: 14px;
+  --stagger-step: 70ms;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root{ --anim-duration: 0ms; --stagger-step: 0ms; }
+  * { animation: none !important; transition: none !important; }
+}
+
+/* Fade-up refined */
+.fade-up{
+  opacity:0;
+  transform: translateY(var(--fade-distance)) scale(.998);
+  transition: opacity var(--anim-duration) var(--anim-ease), transform var(--anim-duration) var(--anim-ease);
+  will-change: opacity, transform;
+  /* allow per-element delay via inline style or --stagger */
+  transition-delay: var(--stagger, 0ms);
+}
+.fade-up.is-visible{
+  opacity:1;
+  transform: translateY(0) scale(1);
+}
+
+/* subtle scale on entrance for hero */
+.premium-hero .fade-up{
+  transform: translateY(calc(var(--fade-distance) * 0.6)) scale(.996);
+  transition-duration: calc(var(--anim-duration) * 1.1);
+}
+
+/* Card micro-interactions */
+.card, .member, .client-card {
+  transition: transform 300ms var(--anim-ease-soft), box-shadow 300ms var(--anim-ease-soft);
+  will-change: transform, box-shadow;
+}
+.card:hover, .member:hover, .client-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 18px 36px rgba(11,18,32,0.08);
+}
+
+/* header show/hide */
+.site-header {
+  transition: transform 360ms var(--anim-ease), box-shadow 360ms var(--anim-ease);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.site-header.hidden { transform: translateY(-110%); box-shadow: none; }
+
+/* subtle underline appearing on nav hover */
+.nav a::after {
+  content: "";
+  display:block;
+  height:2px;
+  width:0%;
+  background:var(--accent, #00A651);
+  transition: width 260ms var(--anim-ease);
+}
+.nav a:hover::after{ width:40%; }
+
+/* Smooth stagger helper for lists (CSS fallback) */
+[data-stagger] > * { opacity:0; transform: translateY(var(--fade-distance)); }
+[data-stagger].is-visible > * {
+  opacity:1; transform: translateY(0);
+  transition: opacity var(--anim-duration) var(--anim-ease), transform var(--anim-duration) var(--anim-ease);
+}
+
+
+
 /* Animations */
 @media (prefers-reduced-motion: reduce) {
   .fade-up { transition: none !important; transform: none !important; opacity: 1 !important; }

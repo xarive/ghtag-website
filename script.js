@@ -117,3 +117,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 })();
+
+
+
+// ---- Refined animation JS ----
+(function(){
+  // header show/hide on scroll (hide on scroll down, show on scroll up)
+  const header = document.querySelector('.site-header');
+  let lastScroll = window.pageYOffset || 0;
+  let ticking = false;
+  if(header){
+    window.addEventListener('scroll', () => {
+      if(ticking) return;
+      window.requestAnimationFrame(() => {
+        const current = window.pageYOffset || 0;
+        if(current > lastScroll && current > 120){
+          header.classList.add('hidden');
+        } else {
+          header.classList.remove('hidden');
+        }
+        lastScroll = current <= 0 ? 0 : current;
+        ticking = false;
+      });
+      ticking = true;
+    }, {passive:true});
+  }
+
+  // refined observer with staggered delays
+  try {
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('is-visible'));
+    } else if('IntersectionObserver' in window){
+      const items = Array.from(document.querySelectorAll('.fade-up'));
+      const io = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            const el = entry.target;
+            // compute stagger: find index amongst siblings or among global order
+            let idx = parseInt(el.getAttribute('data-anim-index') || '-1', 10);
+            if(idx < 0){
+              // fallback: use position in NodeList
+              idx = items.indexOf(el);
+            }
+            const delay = (idx >= 0) ? ('calc(' + idx + ' * var(--stagger-step))') : '0ms';
+            // set CSS custom property for stagger (works with transition-delay)
+            el.style.setProperty('--stagger', (idx >= 0 ? (idx * 70) + 'ms' : '0ms'));
+            el.classList.add('is-visible');
+            observer.unobserve(el);
+          }
+        });
+      }, {threshold: 0.08, rootMargin: '0px 0px -6% 0px'});
+      items.forEach((el,i) => {
+        // if element is a direct child of a data-stagger container, set index per container
+        const parent = el.parentElement;
+        const parentKey = parent && parent.hasAttribute && parent.hasAttribute('data-stagger') ? parent : null;
+        // set a sensible index attribute for predictable staggering
+        el.setAttribute('data-anim-index', i);
+        io.observe(el);
+      });
+    } else {
+      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('is-visible'));
+    }
+  } catch(e){ console.warn('Animation system error', e); }
+
+  // small entrance tweak: on load, add a 'is-loaded' class to body for CSS hooks
+  window.addEventListener('load', () => {
+    document.documentElement.classList.add('is-loaded');
+  });
+})();
+
+// Optional: reduce motion toggle for testing in dev (uncomment to simulate)
+// document.documentElement.style.scrollBehavior = 'smooth';
