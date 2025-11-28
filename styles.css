@@ -352,3 +352,89 @@ footer{
 .client-list{list-style:disc;margin:8px 0 20px 20px;padding:0;columns:1;column-gap:28px}
 .client-list li{padding:4px 0;color:var(--muted);font-size:15px}
 @media(min-width:900px){ .client-list{columns:2} }
+
+/* === TEAM CENTER ALIGNMENT FIX === */
+
+.team {
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.team h2 {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.team-group {
+    margin: 0 auto 50px;
+    padding-bottom: 35px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    max-width: 900px;
+}
+
+.team-group:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.team-group h3 {
+    text-align: center;
+    font-size: 18px;
+    opacity: 0.85;
+    margin-bottom: 20px;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    justify-items: center;
+}
+
+.team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 16px;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 260px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #f5f5f5;
+    border: 1px solid rgba(0,0,0,0.06);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.card-body {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.card-body .name {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.card-body .role {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: 4px;
+}
